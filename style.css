@@ -1,4 +1,3 @@
-/* ====== дизайн-токены ====== */
 :root{
   --bg:#111;
   --panel:#1a1a1a;
@@ -10,15 +9,13 @@
   --border:#333;
 }
 
-/* универсально предсказуемые размеры */
+/* Predictable sizing for everything */
 *,*::before,*::after{ box-sizing:border-box; }
 
-/* доступность: видимый фокус */
-:focus-visible{
-  outline:2px solid var(--accent);
-  outline-offset:2px;
-}
+/* Accessible focus */
+:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
+/* Page container */
 body{
   background-color:var(--bg);
   font-family:Arial, sans-serif;
@@ -38,12 +35,9 @@ body{
   text-align:center;
 }
 
-h1{
-  color:var(--accent);
-  margin:0 0 15px;
-}
+h1{ color:var(--accent); margin:0 0 15px; }
 
-/* ====== навигация по дням недели ====== */
+/* Weekdays bar (week-locked) */
 .weekdays{ margin-bottom:20px; }
 .weekdays button{
   background:var(--tile);
@@ -55,28 +49,30 @@ h1{
   cursor:pointer;
 }
 .weekdays button:hover{ background:var(--accent); color:#000; }
+/* Highlight chosen weekday in the current week */
+.weekdays button.active{ background: var(--accent); color:#000; }
 
-/* ====== основной макет ====== */
-.main{
-  display:flex;
-  justify-content:space-between;
-  gap:30px;
+/* Main two-column layout */
+.main{ display:flex; justify-content:space-between; gap:30px; }
+@media (max-width:720px){ .main{ flex-direction:column; } }
+
+/* Calendar card */
+.calendar-section{ background:var(--panel-2); padding:15px; border-radius:10px; }
+.calendar-title, .progress-title{ text-align:left; }
+
+/* Month nav */
+.calendar-nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:10px; margin:6px 0 4px;
 }
-
-/* mobile */
-@media (max-width:720px){
-  .main{ flex-direction:column; }
+.calendar-nav .cal-title{ font-weight:bold; }
+.calendar-nav button{
+  background:var(--tile); border:none; color:var(--text);
+  padding:6px 10px; border-radius:6px; cursor:pointer;
 }
+.calendar-nav button:hover{ background:var(--accent); color:#000; }
 
-/* ====== календарь ====== */
-.calendar-section{
-  background:var(--panel-2);
-  padding:15px;
-  border-radius:10px;
-}
-.calendar-title,
-.progress-title{ text-align:left; }
-
+/* Calendar grids */
 .calendar-header,
 .calendar-days{
   display:grid;
@@ -85,32 +81,24 @@ h1{
   gap:6px;
   align-items:center;
 }
+.calendar-header span{ text-align:center; color:var(--muted); font-size:12px; }
 
-.calendar-header span{
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-}
-
-/* дни календаря — кнопки */
+/* Calendar day buttons */
 .day{
   background:var(--tile);
   border:none;
   color:var(--text);
   border-radius:50%;
-  width:40px;
-  height:40px;
-  display:grid;
-  place-items:center;
+  width:40px; height:40px;
+  display:grid; place-items:center;
   cursor:pointer;
 }
 .day:hover{ background:var(--accent); color:#000; }
-.day.is-today{
-  background:var(--accent);
-  color:#000;
-}
+.day.is-selected{ background:var(--accent); color:#000; }
+.day.is-today:not(.is-selected){ box-shadow:0 0 0 2px var(--accent) inset; }
+.pad{ width:40px; height:40px; display:block; }
 
-/* ====== прогресс ====== */
+/* Progress bar */
 .progress-bar{
   background:var(--border);
   height:10px;
@@ -118,102 +106,71 @@ h1{
   margin-top:10px;
   overflow:hidden;
 }
-.progress{
-  background:var(--accent);
-  height:100%;
-  width:35%; /* значение синхронизировано с aria-valuenow */
-  border-radius:6px;
-}
+.progress{ background:var(--accent); height:100%; width:0%; border-radius:6px; }
 
-/* ====== To-Do ====== */
-.todo-section{
-  flex:1;
-  background:var(--panel-2);
-  padding:15px;
-  border-radius:10px;
-  text-align:left;
-}
+/* To-Do card */
+.todo-section{ flex:1; background:var(--panel-2); padding:15px; border-radius:10px; text-align:left; }
+.selected-date{ margin:4px 0 10px; color:var(--muted); }
 
+/* Task form */
 .task-input{
   display:flex;
-  gap:10px;
+  flex-wrap:wrap;         
+  align-items:flex-start; 
+  gap:6px;
   margin-bottom:15px;
-  align-items:center;
+}
+.task-input .input{
+  order:1;
+  flex:1 1 auto;
+  font-size:16px; color:#ddd;
+  padding:8px 10px; border:2px solid var(--border);
+  border-radius:6px; outline:none; background-color:var(--panel-2);
+}
+.task-input .add-btn{
+  order:2;
+  font-weight:bold; font-size:16px; background:var(--accent);
+  border:none; color:#000; padding:8px 20px; border-radius:6px; cursor:pointer;
+}
+.task-input .add-btn:hover{ filter:brightness(1.05); }
+
+/* Hint + error take the full width on a new line */
+.task-input small,
+.task-input .error{
+  order:3;
+  flex:1 0 100%;
+  text-align:left;
+  margin-left:0;
 }
 
-.input{
-  flex:1;
-  font-size:16px;
-  color:#ddd;
-  padding:8px 10px;
-  border:2px solid var(--border);
-  border-radius:6px;
-  outline:none;
-  background-color:var(--panel-2);
-}
+/* Hide empty error container */
+.error:empty{ display:none; }
 
-.add-btn{
-  font-weight:bold;
-  font-size:16px;
-  background:var(--accent);
-  border:none;
-  color:#000;
-  padding:8px 20px;
-  border-radius:6px;
-  cursor:pointer;
-}
-.add-btn:hover{ filter:brightness(1.05); }
-
+/* Tasks list */
 .todo-list{
-  list-style:none;
-  padding:0;
-  margin:0;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
+  list-style:none; padding:0; margin:0;
+  display:flex; flex-direction:column; gap:8px;
 }
-
 .todo-item{
-  background:var(--tile);
-  padding:8px 10px;
-  border-radius:6px;
-  display:flex;
-  align-items:center;
-  gap:10px;
+  background:var(--tile); padding:8px 10px; border-radius:6px;
+  display:flex; align-items:center; gap:10px;
 }
-
 .todo-item input[type="checkbox"]{ margin:0; }
-.todo-item label{
-  flex:1;
-  cursor:pointer;
-}
+.todo-item label{ flex:1; cursor:pointer; }
 
+/* Delete button (icon) */
 .remove{
-  background:transparent;
-  border:0;
-  cursor:pointer;
-  color:var(--muted);
-  font-size:16px;
-  line-height:1;
-  padding:6px 8px; /* увеличиваем кликабельную область */
-  border-radius:6px;
+  background:transparent; border:0; cursor:pointer;
+  color:var(--muted); font-size:16px; line-height:1;
+  padding:6px 8px; border-radius:6px;
 }
 .remove:hover{ color:red; background:rgba(255,0,0,.06); }
 
-/* текст ошибок и скрытые подписи */
-.error{ margin:6px 0 0; font-size:14px; color:#ff9c9e; }
+/* Visually-hidden utility for accessible labels */
 .sr-only{
-  position:absolute!important;
-  width:1px; height:1px;
-  padding:0; margin:-1px;
-  overflow:hidden; clip:rect(0 0 0 0);
-  white-space:nowrap; border:0;
+  position:absolute!important; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
 }
 
-/* ====== футер ====== */
-footer{
-  margin-top:20px;
-  font-size:12px;
-  color:var(--muted);
-  text-align:center;
-}
+/* Footer */
+footer{ margin-top:20px; font-size:12px; color:var(--muted); text-align:center; }
