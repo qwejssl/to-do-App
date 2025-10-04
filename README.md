@@ -53,10 +53,12 @@ A minimal, accessible, dark-themed productivity web app with a month calendar, a
 
 
 \## 📁 Project Structure
-My-Productivity/
-├── index.html # Main HTML file (UI layout)
-├── style.css # Styles (design tokens, layout, accessibility)
-├── app.js # JavaScript logic (calendar, tasks, localStorage)
-└── README.md # Documentation
 
+\## My-Productivity/
+\*\*index.html\*\* - Main HTML file (UI layout)
 
+\*\*style.css\*\* - Styles (design tokens, layout, accessibility)
+
+\*\*app.js\*\* - JavaScript logic (calendar, tasks, localStorage)
+
+\*\*README.md\*\* - Documentation 
