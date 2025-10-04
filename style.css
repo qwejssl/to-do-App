@@ -1,0 +1,219 @@
+/* ====== дизайн-токены ====== */
+:root{
+  --bg:#111;
+  --panel:#1a1a1a;
+  --panel-2:#222;
+  --tile:#2a2a2a;
+  --text:#fff;
+  --muted:#888;
+  --accent:#4da6ff;
+  --border:#333;
+}
+
+/* универсально предсказуемые размеры */
+*,*::before,*::after{ box-sizing:border-box; }
+
+/* доступность: видимый фокус */
+:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+
+body{
+  background-color:var(--bg);
+  font-family:Arial, sans-serif;
+  color:var(--text);
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.container{
+  background-color:var(--panel);
+  padding:20px;
+  border-radius:12px;
+  width:1000px;
+  text-align:center;
+}
+
+h1{
+  color:var(--accent);
+  margin:0 0 15px;
+}
+
+/* ====== навигация по дням недели ====== */
+.weekdays{ margin-bottom:20px; }
+.weekdays button{
+  background:var(--tile);
+  border:none;
+  color:var(--text);
+  padding:8px 14px;
+  margin:0 4px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.weekdays button:hover{ background:var(--accent); color:#000; }
+
+/* ====== основной макет ====== */
+.main{
+  display:flex;
+  justify-content:space-between;
+  gap:30px;
+}
+
+/* mobile */
+@media (max-width:720px){
+  .main{ flex-direction:column; }
+}
+
+/* ====== календарь ====== */
+.calendar-section{
+  background:var(--panel-2);
+  padding:15px;
+  border-radius:10px;
+}
+.calendar-title,
+.progress-title{ text-align:left; }
+
+.calendar-header,
+.calendar-days{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  margin:10px 0;
+  gap:6px;
+  align-items:center;
+}
+
+.calendar-header span{
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* дни календаря — кнопки */
+.day{
+  background:var(--tile);
+  border:none;
+  color:var(--text);
+  border-radius:50%;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.day:hover{ background:var(--accent); color:#000; }
+.day.is-today{
+  background:var(--accent);
+  color:#000;
+}
+
+/* ====== прогресс ====== */
+.progress-bar{
+  background:var(--border);
+  height:10px;
+  border-radius:6px;
+  margin-top:10px;
+  overflow:hidden;
+}
+.progress{
+  background:var(--accent);
+  height:100%;
+  width:35%; /* значение синхронизировано с aria-valuenow */
+  border-radius:6px;
+}
+
+/* ====== To-Do ====== */
+.todo-section{
+  flex:1;
+  background:var(--panel-2);
+  padding:15px;
+  border-radius:10px;
+  text-align:left;
+}
+
+.task-input{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+  align-items:center;
+}
+
+.input{
+  flex:1;
+  font-size:16px;
+  color:#ddd;
+  padding:8px 10px;
+  border:2px solid var(--border);
+  border-radius:6px;
+  outline:none;
+  background-color:var(--panel-2);
+}
+
+.add-btn{
+  font-weight:bold;
+  font-size:16px;
+  background:var(--accent);
+  border:none;
+  color:#000;
+  padding:8px 20px;
+  border-radius:6px;
+  cursor:pointer;
+}
+.add-btn:hover{ filter:brightness(1.05); }
+
+.todo-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.todo-item{
+  background:var(--tile);
+  padding:8px 10px;
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.todo-item input[type="checkbox"]{ margin:0; }
+.todo-item label{
+  flex:1;
+  cursor:pointer;
+}
+
+.remove{
+  background:transparent;
+  border:0;
+  cursor:pointer;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1;
+  padding:6px 8px; /* увеличиваем кликабельную область */
+  border-radius:6px;
+}
+.remove:hover{ color:red; background:rgba(255,0,0,.06); }
+
+/* текст ошибок и скрытые подписи */
+.error{ margin:6px 0 0; font-size:14px; color:#ff9c9e; }
+.sr-only{
+  position:absolute!important;
+  width:1px; height:1px;
+  padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0);
+  white-space:nowrap; border:0;
+}
+
+/* ====== футер ====== */
+footer{
+  margin-top:20px;
+  font-size:12px;
+  color:var(--muted);
+  text-align:center;
+}

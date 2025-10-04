@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Productivity</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>My Productivity</h1>
+    </header>
+
+    <nav class="weekdays" aria-label="Filter by weekday">
+      <button type="button">Mon</button>
+      <button type="button">Tue</button>
+      <button type="button">Wed</button>
+      <button type="button">Thu</button>
+      <button type="button">Fri</button>
+      <button type="button">Sat</button>
+      <button type="button">Sun</button>
+    </nav>
+
+    <main class="main">
+      <section class="calendar-section" aria-labelledby="cal-title">
+        <h2 id="cal-title" class="calendar-title">Calendar</h2>
+
+        <div class="calendar" role="group" aria-label="Month view">
+          <!-- заголовок дней недели — декоративный -->
+          <div class="calendar-header" aria-hidden="true">
+            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+          </div>
+
+          <div class="calendar-days">
+            <!-- дни — кнопки; активный день помечен aria-current -->
+            <button type="button" class="day" aria-label="1">1</button>
+            <button type="button" class="day" aria-label="2">2</button>
+            <button type="button" class="day" aria-label="3">3</button>
+            <button type="button" class="day" aria-label="4">4</button>
+            <button type="button" class="day" aria-label="5">5</button>
+            <button type="button" class="day" aria-label="6">6</button>
+            <button type="button" class="day" aria-label="7">7</button>
+            <button type="button" class="day" aria-label="8">8</button>
+            <button type="button" class="day" aria-label="9">9</button>
+            <button type="button" class="day" aria-label="10">10</button>
+            <button type="button" class="day" aria-label="11">11</button>
+            <button type="button" class="day" aria-label="12">12</button>
+            <button type="button" class="day" aria-label="13">13</button>
+            <button type="button" class="day is-today" aria-current="date" aria-label="14">14</button>
+            <button type="button" class="day" aria-label="15">15</button>
+            <button type="button" class="day" aria-label="16">16</button>
+            <button type="button" class="day" aria-label="17">17</button>
+            <button type="button" class="day" aria-label="18">18</button>
+            <button type="button" class="day" aria-label="19">19</button>
+            <button type="button" class="day" aria-label="20">20</button>
+            <button type="button" class="day" aria-label="21">21</button>
+            <button type="button" class="day" aria-label="22">22</button>
+            <button type="button" class="day" aria-label="23">23</button>
+            <button type="button" class="day" aria-label="24">24</button>
+            <button type="button" class="day" aria-label="25">25</button>
+            <button type="button" class="day" aria-label="26">26</button>
+            <button type="button" class="day" aria-label="27">27</button>
+            <button type="button" class="day" aria-label="28">28</button>
+            <button type="button" class="day" aria-label="29">29</button>
+            <button type="button" class="day" aria-label="30">30</button>
+          </div>
+        </div>
+
+        <h2 class="progress-title" id="progress-title">Progress</h2>
+        <div class="progress-bar" role="progressbar" aria-labelledby="progress-title" aria-valuemin="0"
+          aria-valuemax="100" aria-valuenow="35">
+          <div class="progress" style="width: 35%;"></div>
+        </div>
+      </section>
+
+      <section class="todo-section" aria-labelledby="todo-title">
+        <h2 id="todo-title">To-Do List</h2>
+
+        <form class="task-input" action="#" method="post" novalidate>
+          <label class="sr-only" for="new-task">Новая задача</label>
+          <input class="input" id="new-task" name="task" type="text" placeholder="Enter a new task" autocomplete="off"
+            aria-describedby="task-error" />
+          <button class="add-btn" type="submit">Add</button>
+          <p id="task-error" class="error" role="alert"></p>
+        </form>
+
+        <ul class="todo-list">
+          <li class="todo-item">
+            <input id="task-1" type="checkbox" />
+            <label for="task-1">Buy groceries</label>
+            <button type="button" class="remove" aria-label="Удалить задачу">✖</button>
+          </li>
+          <li class="todo-item">
+            <input id="task-2" type="checkbox" />
+            <label for="task-2">Walk the dog</label>
+            <button type="button" class="remove" aria-label="Удалить задачу">✖</button>
+          </li>
+          <li class="todo-item">
+            <input id="task-3" type="checkbox" />
+            <label for="task-3">Read a book</label>
+            <button type="button" class="remove" aria-label="Удалить задачу">✖</button>
+          </li>
+          <li class="todo-item">
+            <input id="task-4" type="checkbox" />
+            <label for="task-4">Workout</label>
+            <button type="button" class="remove" aria-label="Удалить задачу">✖</button>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      Stay focused. Stay consistent. © 2025 My Productivity App
+    </footer>
+  </div>
+</body>
+
+</html>
